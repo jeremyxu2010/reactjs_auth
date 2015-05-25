@@ -66,7 +66,10 @@ module.exports = function(env_prod){
             postLoaders: postLoaders_options,
             loaders: [{
                 test: /\.jsx$/,
-                loader: 'jsx-loader?insertPragma=React.DOM&harmony'
+                loader: 'jsx-loader?insertPragma=React.DOM&harmony!strict'
+            }, {
+                test: /\.js$/,
+                loader: 'strict'
             }, {
                 test: [
                     /\.\/components\/.*\.jsx$/

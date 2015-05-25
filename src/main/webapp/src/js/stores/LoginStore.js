@@ -43,8 +43,12 @@ LoginStore.prototype.isLoggedIn = function() {
     return !!this._user;
 };
 
-var loginStore = new LoginStore();
+LoginStore.prototype.init = function() {
+    var that = this;
+    this.subscribe(function(){return that._registerToActions.bind(that);});
+    return this;
+};
 
-loginStore.subscribe(function(){return loginStore._registerToActions.bind(loginStore);});
+var loginStore = (new LoginStore()).init();
 
 module.exports = loginStore;

@@ -1,0 +1,6 @@
+*.iml
+.DS_Store
+assets/*
+!assets/.do_not_delete
+node_modules/*
+!node_modules/.do_not_delete

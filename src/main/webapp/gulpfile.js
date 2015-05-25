@@ -7,7 +7,7 @@ var env_prod = process.env.NODE_ENV === 'production';
 
 // Clean output directory
 gulp.task('clean', function(cb){
-    del(['./assets/*'], cb);
+    del([__dirname + '/assets/*'], cb);
 });
 
 gulp.task('webpack_compile', ['clean'], function(cb){
@@ -24,7 +24,7 @@ gulp.task('webpack_compile', ['clean'], function(cb){
 
 
 gulp.task('watch', ['webpack_compile'], function(){
-    gulp.watch(['./src/js/**/*.js', './src/js/**/*.jsx', './src/less/**/*.less' ], ['webpack_compile']);
+    gulp.watch([__dirname + '/src/js/**/*.js', __dirname + '/src/js/**/*.jsx', __dirname + '/src/less/**/*.less' ], ['webpack_compile']);
 });
 
 gulp.task('default',['watch']);

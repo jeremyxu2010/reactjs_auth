@@ -8,7 +8,9 @@ var LoginConstants = require('../constants/LoginConstants');
 var BaseStore = require('./BaseStore');
 
 var LoginStore = function(){
+    var that = this;
     BaseStore.call(this);
+    this.subscribe(function(){return that._registerToActions.bind(that);});
     this._user = null;
     this._jwt = null;
 };
@@ -43,12 +45,6 @@ LoginStore.prototype.isLoggedIn = function() {
     return !!this._user;
 };
 
-LoginStore.prototype.init = function() {
-    var that = this;
-    this.subscribe(function(){return that._registerToActions.bind(that);});
-    return this;
-};
-
-var loginStore = (new LoginStore()).init();
+var loginStore = new LoginStore();
 
 module.exports = loginStore;

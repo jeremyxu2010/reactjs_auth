@@ -12,7 +12,12 @@ var output_options = {
 };
 var plugins_options = [
     new webpack.optimize.CommonsChunkPlugin("vendor", "vendor.js"),
-    new ExtractTextPlugin('[name].css', {allChunks: true})
+    new ExtractTextPlugin('[name].css', {allChunks: true}),
+    new webpack.DefinePlugin({
+        "process.env": {
+            NODE_ENV: JSON.stringify(env_prod ? "production" : 'develop')
+        }
+    })
 ];
 if(!env_prod){
     plugins_options.push(new webpack.SourceMapDevToolPlugin({
@@ -24,12 +29,6 @@ if(env_prod){
     plugins_options.push(new webpack.optimize.UglifyJsPlugin({
         compress: {
             warnings: false
-        }
-    }));
-
-    plugins_options.push(new webpack.DefinePlugin({
-        "process.env": {
-            NODE_ENV: JSON.stringify("production")
         }
     }));
 }

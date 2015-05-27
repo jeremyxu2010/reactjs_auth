@@ -74,11 +74,6 @@ module.exports = {
             test: /\.js$/,
             loader: 'strict'
         }, {
-            test: [
-                /\.\/components\/.*\.jsx$/
-            ],
-            loader: "react-router-proxy"
-        }, {
             test: /\.css$/,
             loader: ExtractTextPlugin.extract("style-loader", "css-loader?sourceMap!autoprefixer-loader")
         },{

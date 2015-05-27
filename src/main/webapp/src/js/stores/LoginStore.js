@@ -1,6 +1,3 @@
-var EventEmitter = require('events').EventEmitter;
-var _ = require('lodash');
-var Immutable = require('immutable');
 var jwt_decode = require('jwt-decode');
 var inherits = require('inherits');
 

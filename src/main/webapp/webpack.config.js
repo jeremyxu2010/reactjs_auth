@@ -34,11 +34,20 @@ if(env_prod){
     }));
 }
 
+var preLoaders_options = [];
+if(!env_prod){
+    preLoaders_options.push({
+        test: /\.js$/, // include .js files
+        exclude: /node_modules/, // exclude any and all files in the node_modules folder
+        loader: "jshint-loader"
+    });
+}
+
 var postLoaders_options = [];
 if(env_prod) {
-    postLoaders_options = [{
+    postLoaders_options.push({
         loader: 'transform?envify'
-    }];
+    });
 }
 
 module.exports = {
@@ -66,6 +75,7 @@ module.exports = {
     cache: !env_prod,
     watch: !env_prod,
     module: {
+        preLoaders: preLoaders_options,
         postLoaders: postLoaders_options,
         loaders: [{
             test: /\.jsx$/,
@@ -86,6 +96,28 @@ module.exports = {
             test: /\.(png|jpg|gif)$/,
             loader: 'url-loader?limit=8192'
         }],
+    },
+    jshint: {
+        // This option prohibits the use of explicitly undeclared variables. This option is very useful for spotting leaking and mistyped variables.
+        undef: true,
+
+        // This option defines globals exposed by modern browsers: all the way from good old document and navigator to the HTML5 FileReader and other new developments in the browser world.
+        browser: true,
+
+        // This option defines globals that are usually used for logging poor-man's debugging: console, alert, etc. It is usually a good idea to not ship them in production because, for example, console.log breaks in legacy versions of Internet Explorer.
+        devel: false,
+
+        // This option warns when you define and never use your variables. It is very useful for general code cleanup, especially when used in addition to undef.
+        unused: true,
+
+        // jshint errors are displayed by default as warnings
+        // set emitErrors to true to display them as errors
+        emitErrors: true,
+
+        // jshint to not interrupt the compilation
+        // if you want any file with jshint errors to fail
+        // set failOnHint to true
+        failOnHint: true
     },
     resolve: {
         extensions: ['', '.js', '.jsx']

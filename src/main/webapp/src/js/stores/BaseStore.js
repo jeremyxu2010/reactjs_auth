@@ -23,7 +23,7 @@ BaseStore.prototype.emitChange = function() {
 };
 
 BaseStore.prototype.addChangeListener = function(cb) {
-    this.on('CHANGE', cb)
+    this.on('CHANGE', cb);
 };
 
 BaseStore.prototype.removeChangeListener = function(cb) {
